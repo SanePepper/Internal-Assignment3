@@ -179,14 +179,5 @@ ostream& operator<<(ostream& os, const Coord<T>& A){
 }
 
 int main(){
-	Coord<float> a(3.6,4.3);
-	Coord<float> b(3.6,5.8);
-	Coord<float> c(3.6,5.8);
-	std::cout << a << std::endl;
-	std::cout << Coord<float>::Man_Dist(a,c) << std::endl;
-	std::cout << Coord<float>::Dist(a,b) << std::endl;
-	std::cout << Coord<float>::Slope(a,c) << std::endl;
-	std::cout << Coord<float>::Tri_Area(a,b,c) << std::endl;
-	std::cout << Coord<float>::Radius(a,b,c) << std::endl;
 	return 0;
 }
