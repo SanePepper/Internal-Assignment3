@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 template <typename T = uint16_t>
@@ -13,6 +12,31 @@ public:
 	Coord(T x_cor, T y_cor){
 		x = x_cor;
 		y = y_cor;
+	}
+
+	/**
+	 * @brief Calculate the approximation of the inverse of square root
+	 * 		  Caary out 2 iteration of calculations to enhance accuracy with minimal runtime
+	 * @param x Floating point number for calculation
+	 * @return inverse square root
+	 */
+	static float inv_sqrt(float x){
+		float xhalf = 0.5f*x;
+		int i = *(int*)&x;
+		i = 0x5f3759df - (i >> 1);
+		x = *(float*)&i;
+		x = x*(1.5f - xhalf*x*x);
+		x = x*(1.5f - xhalf*x*x);
+		return x;
+	}
+
+	/**
+	 * @brief Calculate the approximation of square root
+	 * @param x Floating point number
+	 * @return The approxiamte square root of x
+	 */
+	static float _sqrt(float x){
+		return x*inv_sqrt(x);
 	}
 
 	/**
@@ -43,7 +67,7 @@ public:
 	static double Dist(const Coord<T>& A, const Coord<T>& B){
 		T dx = (A-B).x;
 		T dy = (A-B).y;
-		return sqrt(dx*dx + dy*dy);
+		return _sqrt(dx*dx + dy*dy);
 	}
 
 	/**
@@ -59,6 +83,7 @@ public:
 
 	/**
 	 * @brief Calculate the slope of the line segment AB
+	 * 		  Output an error message and return 0 when the line is vertical as the slope is undefined
 	 * @param A First coordinate
 	 * @param B Second coordinate
 	 * @return double The slope
@@ -93,6 +118,7 @@ public:
 
 	/**
 	 * @brief Calculate the radius of the circle that can pass through the 3 coordinates
+	 * 		  Output an error message when the area of the triangle is 0 as divison by 0 calculation is undefined
 	 * @param A First coordinate
 	 * @param B Second coordinate
 	 * @param C Third coordinate
