@@ -16,7 +16,8 @@ public:
 
 	/**
 	 * @brief Calculate the approximation of the inverse of square root
-	 * 		  Caary out 2 iteration of calculations to enhance accuracy with minimal runtime
+	 * 		  Adopted the fast inverse square root algorithm from Quake 3
+	 * 		  Carry out 2 iterations of calculations to enhance accuracy with minimal runtime
 	 * @param x Floating point number for calculation
 	 * @return inverse square root
 	 */
